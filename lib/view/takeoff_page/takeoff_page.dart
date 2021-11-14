@@ -27,6 +27,14 @@ class _TakeOffPageState extends State<TakeOffPage>
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
+            inputCircleContainer('row1', 'Crew Row', 'kg', row1Controller),
+            inputCircleContainer('row2', 'Pax Row 2', 'kg', row2Controller),
+            inputCircleContainer('row3', 'Pax Row 3', 'kg', row3Controller),
+          ],
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
             inputContainer('noseBag', 'Nose Bags', 'Qtd', noseBagsController),
             inputContainer('boxBag', 'Box Bags', 'Qtd', boxBagsController)
           ],
@@ -38,14 +46,6 @@ class _TakeOffPageState extends State<TakeOffPage>
                 'fwdMark', 'Fwd Ballonet', 'Mark', fwdMarkController),
             inputContainer(
                 'aftMark', 'Aft Ballonet', 'Mark', aftMarkController),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            inputContainer('row1', 'Crew Row', 'kg', row1Controller),
-            inputContainer('row2', 'Pax Row 2', 'kg', row2Controller),
-            inputContainer('row3', 'Pax Row 3', 'kg', row3Controller),
           ],
         ),
       ],
@@ -61,20 +61,26 @@ class _TakeOffPageState extends State<TakeOffPage>
 
   Container inputContainer(String varType, String varText, String hintText,
       TextEditingController controller) {
+    double height = MediaQuery.of(context).size.height;
+
     return Container(
       padding: const EdgeInsets.only(top: 8.0, left: 2),
       child: Column(
         children: [
           Container(
-            child: Text(varText),
+            child: Text(
+              varText,
+              style: TextStyle(fontSize: height * .02),
+            ),
           ),
           Container(
-            width: 150,
-            height: 50,
+            width: MediaQuery.of(context).size.width * .45,
+            height: height * 0.045,
             child: TextFormField(
                 decoration: InputDecoration(
                     labelText: hintText,
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     hintText: hintText),
                 controller: controller,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
@@ -104,6 +110,66 @@ class _TakeOffPageState extends State<TakeOffPage>
                         }
                       }
                       break;
+
+                    case 'fwdMark':
+                      {
+                        try {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .provFwdMark(double.parse(controller.value.text));
+                        } on Exception catch (_) {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .provFwdMark(0.0);
+                        }
+                      }
+                      break;
+                    case 'aftMark':
+                      {
+                        try {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .provAftMark(double.parse(controller.value.text));
+                        } on Exception catch (_) {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .provAftMark(0.0);
+                        }
+                      }
+                      break;
+                  }
+                }),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container inputCircleContainer(String varType, String varText,
+      String hintText, TextEditingController controller) {
+    double height = MediaQuery.of(context).size.height;
+    return Container(
+      padding: const EdgeInsets.only(top: 8.0, left: 4.0),
+      child: Column(
+        children: [
+          Container(
+            child: Text(
+              varText,
+              style: TextStyle(fontSize: height * .02),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width * .25,
+            height: height * 0.045,
+            child: TextFormField(
+                decoration: InputDecoration(
+                    labelText: hintText,
+                    border: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                      Radius.circular(50.0),
+                    )),
+                    hintText: hintText),
+                controller: controller,
+                keyboardType: TextInputType.phone,
+                style: TextStyle(fontSize: height * .02),
+                onChanged: (value) {
+                  switch (varType) {
                     case 'row1':
                       {
                         try {
@@ -134,28 +200,6 @@ class _TakeOffPageState extends State<TakeOffPage>
                         } on Exception catch (_) {
                           Provider.of<DataProvider>(context, listen: false)
                               .provRow3(0.0);
-                        }
-                      }
-                      break;
-                    case 'fwdMark':
-                      {
-                        try {
-                          Provider.of<DataProvider>(context, listen: false)
-                              .provFwdMark(double.parse(controller.value.text));
-                        } on Exception catch (_) {
-                          Provider.of<DataProvider>(context, listen: false)
-                              .provFwdMark(0.0);
-                        }
-                      }
-                      break;
-                    case 'aftMark':
-                      {
-                        try {
-                          Provider.of<DataProvider>(context, listen: false)
-                              .provAftMark(double.parse(controller.value.text));
-                        } on Exception catch (_) {
-                          Provider.of<DataProvider>(context, listen: false)
-                              .provAftMark(0.0);
                         }
                       }
                       break;

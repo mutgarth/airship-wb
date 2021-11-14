@@ -12,7 +12,7 @@ class _ResultsPageState extends State<ResultsPage>
   bool get wantKeepAlive => true;
 
   double edgeValue = 10;
-  double fonteSize1 = 45;
+  double fonteSize1 = 35;
   double fonteSize2 = 35;
 
   final bagsToEqController = TextEditingController();
@@ -212,34 +212,25 @@ class _ResultsPageState extends State<ResultsPage>
         Container(
             margin: const EdgeInsets.only(left: 35.0),
             padding: const EdgeInsets.all(15),
-            height: 300,
+            //height: 300,
             child: VerticalDivider(color: Colors.blue)),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            inputContainer('bagsToEq', 'Bags to Eq', 'Qtd', bagsToEqController),
-            inputContainer('bagsAddToBox', 'Bags Add to Box', 'Qtd',
-                bagsAddtoBoxController),
-            resultantLDCondition(),
-            accpetedTOCondition(),
-          ],
+        Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              inputContainer(
+                  'bagsToEq', 'Bags to Eq', 'Qtd', bagsToEqController),
+              inputContainer('bagsAddToBox', 'Bags Add to Box', 'Qtd',
+                  bagsAddtoBoxController),
+              resultantLDCondition(),
+              accpetedTOCondition(),
+            ],
+          ),
         ),
         Container(
             padding: const EdgeInsets.all(15),
-            height: 300,
+            //height: 300,
             child: VerticalDivider(color: Colors.blue)),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(left: 25.0),
-              child: ElevatedButton(
-                onPressed: () {},
-                child: const Text('Save Data'),
-              ),
-            ),
-          ],
-        ),
       ],
     );
 

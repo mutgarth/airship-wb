@@ -10,25 +10,31 @@ class MyAppPage extends StatefulWidget {
 }
 
 class _MyAppPageState extends State<MyAppPage> {
+  double resultContainerSize = .30;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text('ADB Pilot'),
-      ),
+      // appBar: AppBar(
+      //   title: Text('ADB Pilot'),
+      // ),
       body: Container(
+        color: Colors.white,
+        //width: MediaQuery.of(context).size.width * 1,
+        // height: MediaQuery.of(context).size.height * 1,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
-                // margin: const EdgeInsets.all(15.0),
-                margin: const EdgeInsets.only(
-                    left: 15, right: 15, top: 10, bottom: 10),
+                //width: MediaQuery.of(context).size.width * 1,
+                height:
+                    MediaQuery.of(context).size.height * resultContainerSize,
 
-                padding: const EdgeInsets.all(3.0),
+                // margin: const EdgeInsets.all(15.0),
+                // margin: const EdgeInsets.only(
+                // left: 15, right: 15, top: 10, bottom: 10),
+                //padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
-                    color: Colors.white,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10),
@@ -43,19 +49,22 @@ class _MyAppPageState extends State<MyAppPage> {
                       )
                     ]),
                 child: SizedBox(
-                  height: 300,
+                  //height: 150,
                   child: ResultsPage(),
                 ),
               ),
               DefaultTabController(
                 length: 2,
                 child: Container(
-                  margin: const EdgeInsets.only(left: 15, right: 15),
+                  height: MediaQuery.of(context).size.height *
+                      (1 - resultContainerSize),
+
+                  //margin: const EdgeInsets.only(left: 15, right: 15),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
+                          topLeft: Radius.circular(35),
+                          topRight: Radius.circular(35),
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10)),
                       boxShadow: [
@@ -74,12 +83,12 @@ class _MyAppPageState extends State<MyAppPage> {
                         tabs: [
                           Tab(icon: Icon(Icons.article)),
                           Tab(icon: Icon(Icons.airplanemode_active)),
-                          // Tab(icon: Icon(Icons.flight_land)),
                         ],
                       ),
                     ),
                     Container(
-                      height: 550,
+                      height: MediaQuery.of(context).size.height *
+                          (.9 - resultContainerSize),
                       child: TabBarView(
                         children: [
                           EnvPage(),
@@ -92,6 +101,12 @@ class _MyAppPageState extends State<MyAppPage> {
                 ),
               )
             ]),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        label: const Text('Save Data'),
+        icon: const Icon(Icons.ac_unit),
+        backgroundColor: Colors.red,
       ),
     );
   }

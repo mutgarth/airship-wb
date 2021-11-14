@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wab_app/provider/data_provider.dart';
@@ -30,6 +28,16 @@ class _EnvPageState extends State<EnvPage>
     super.build(context);
     Widget body = Column(
       children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            inputCircleContainer(
+                'elevation', 'Elevation', 'ft', elevController),
+            inputCircleContainer('purity', 'Purity', '%', purityController),
+            inputCircleContainer(
+                'humidity', 'Humidity', '%', humidityController),
+          ],
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -67,14 +75,6 @@ class _EnvPageState extends State<EnvPage>
             inputContainer('elevation', 'Elevation LD', 'ft', elevControllerLD),
           ],
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            inputContainer('elevation', 'Elevation', 'ft', elevController),
-            inputContainer('purity', 'Purity', '%', purityController),
-            inputContainer('humidity', 'Humidity', '%', humidityController),
-          ],
-        ),
       ],
     );
 
@@ -86,26 +86,104 @@ class _EnvPageState extends State<EnvPage>
     );
   }
 
-  Container inputContainer(String varType, String varText, String hintText,
-      TextEditingController controller) {
+  Container inputCircleContainer(String varType, String varText,
+      String hintText, TextEditingController controller) {
+    double height = MediaQuery.of(context).size.height;
     return Container(
       padding: const EdgeInsets.only(top: 8.0, left: 4.0),
       child: Column(
         children: [
           Container(
-            child: Text(varText),
+            child: Text(
+              varText,
+              style: TextStyle(fontSize: height * .02),
+            ),
           ),
           Container(
-            width: 150,
-            height: 50,
+            width: MediaQuery.of(context).size.width * .25,
+            height: height * 0.045,
             child: TextFormField(
                 decoration: InputDecoration(
                     labelText: hintText,
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                      Radius.circular(50.0),
+                    )),
                     hintText: hintText),
                 controller: controller,
                 keyboardType: TextInputType.phone,
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: height * .02),
+                onChanged: (value) {
+                  switch (varType) {
+                    case 'elevation':
+                      {
+                        try {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .provElevation(
+                                  double.parse(controller.value.text));
+                        } on Exception catch (_) {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .provElevation(0.0);
+                        }
+                      }
+                      break;
+
+                    case 'purity':
+                      {
+                        try {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .provPurity(double.parse(controller.value.text));
+                        } on Exception catch (_) {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .provPurity(0.0);
+                        }
+                      }
+                      break;
+                    case 'humidity':
+                      {
+                        try {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .provHumidity(
+                                  double.parse(controller.value.text));
+                        } on Exception catch (_) {
+                          Provider.of<DataProvider>(context, listen: false)
+                              .provHumidity(0.0);
+                        }
+                      }
+                      break;
+                  }
+                }),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container inputContainer(String varType, String varText, String hintText,
+      TextEditingController controller) {
+    double height = MediaQuery.of(context).size.height;
+    return Container(
+      padding: const EdgeInsets.only(top: 8.0, left: 4.0),
+      child: Column(
+        children: [
+          Container(
+            child: Text(
+              varText,
+              style: TextStyle(fontSize: height * .02),
+            ),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width * .45,
+            height: height * 0.045,
+            child: TextFormField(
+                decoration: InputDecoration(
+                    labelText: hintText,
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    hintText: hintText),
+                controller: controller,
+                keyboardType: TextInputType.phone,
+                style: TextStyle(fontSize: height * .02),
                 onChanged: (value) {
                   switch (varType) {
                     case 'oatLD':
