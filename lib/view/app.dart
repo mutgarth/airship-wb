@@ -15,25 +15,14 @@ class _MyAppPageState extends State<MyAppPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      // appBar: AppBar(
-      //   title: Text('ADB Pilot'),
-      // ),
       body: Container(
         color: Colors.white,
-        //width: MediaQuery.of(context).size.width * 1,
-        // height: MediaQuery.of(context).size.height * 1,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Container(
-                //width: MediaQuery.of(context).size.width * 1,
                 height:
                     MediaQuery.of(context).size.height * resultContainerSize,
-
-                // margin: const EdgeInsets.all(15.0),
-                // margin: const EdgeInsets.only(
-                // left: 15, right: 15, top: 10, bottom: 10),
-                //padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),
@@ -58,8 +47,6 @@ class _MyAppPageState extends State<MyAppPage> {
                 child: Container(
                   height: MediaQuery.of(context).size.height *
                       (1 - resultContainerSize),
-
-                  //margin: const EdgeInsets.only(left: 15, right: 15),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
