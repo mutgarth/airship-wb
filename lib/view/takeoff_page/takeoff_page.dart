@@ -52,6 +52,7 @@ class _TakeOffPageState extends State<TakeOffPage>
     );
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         body: body,
@@ -78,10 +79,10 @@ class _TakeOffPageState extends State<TakeOffPage>
             height: height * 0.045,
             child: TextFormField(
                 decoration: InputDecoration(
-                    labelText: hintText,
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10)),
-                    hintText: hintText),
+                  labelText: hintText,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                ),
                 controller: controller,
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
                 onChanged: (value) {
@@ -159,12 +160,12 @@ class _TakeOffPageState extends State<TakeOffPage>
             height: height * 0.045,
             child: TextFormField(
                 decoration: InputDecoration(
-                    labelText: hintText,
-                    border: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(
-                      Radius.circular(50.0),
-                    )),
-                    hintText: hintText),
+                  labelText: hintText,
+                  border: OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                    Radius.circular(50.0),
+                  )),
+                ),
                 controller: controller,
                 keyboardType: TextInputType.phone,
                 style: TextStyle(fontSize: height * .02),
