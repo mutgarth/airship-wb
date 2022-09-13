@@ -12,40 +12,64 @@ class _ResultsPageState extends State<ResultsPage>
   bool get wantKeepAlive => true;
 
   double edgeValue = 10;
-  double fonteSize1 = 35;
-  double fonteSize2 = 35;
+  double fonteSize1 = 2;
+  double fonteSize2 = 2;
+  double fontFactor = 0.02;
 
   final bagsToEqController = TextEditingController();
   final bagsAddtoBoxController = TextEditingController();
 
   Container cg() {
+    double height = MediaQuery.of(context).size.height;
     double cgValue = Provider.of<DataProvider>(context).provCG();
     if (cgValue < 840 || cgValue > 872) {
       return Container(
-        padding: EdgeInsets.all(edgeValue),
-        child: Text(
-          'CG: ' + cgValue.toStringAsFixed(2) + ' in',
-          style: TextStyle(
-              fontSize: fonteSize1,
-              fontWeight: FontWeight.bold,
-              color: Colors.red),
-        ),
-      );
+          padding: EdgeInsets.all(edgeValue),
+          child: Row(
+            children: [
+              Text(
+                'CG: ' + cgValue.toStringAsFixed(2) + ' in',
+                style: TextStyle(
+                    fontSize: height * fontFactor,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.red),
+              ),
+            ],
+          ));
     } else {
       return Container(
-        padding: EdgeInsets.all(edgeValue),
-        child: Text(
-          'CG: ' + cgValue.toStringAsFixed(2) + ' in',
-          style: TextStyle(
-              fontSize: fonteSize1,
-              fontWeight: FontWeight.bold,
-              color: Colors.green),
-        ),
-      );
+          padding: EdgeInsets.all(edgeValue),
+          child: Row(
+            children: [
+              Column(
+                children: [
+                  Text(
+                    'CG: ',
+                    style: TextStyle(
+                        fontSize: height * fontFactor,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black54),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Text(
+                    cgValue.toStringAsFixed(2) + ' in',
+                    style: TextStyle(
+                        fontSize: height * fontFactor,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green),
+                  ),
+                ],
+              )
+            ],
+          ));
     }
   }
 
   Container totalSuspendedWeight() {
+    double height = MediaQuery.of(context).size.height;
     double tsw = Provider.of<DataProvider>(context).provTotalSuspendedWeight();
     if (tsw < 2430) {
       return Container(
@@ -53,7 +77,7 @@ class _ResultsPageState extends State<ResultsPage>
         child: Text(
           'TSW: ' + tsw.toStringAsFixed(2) + ' kg',
           style: TextStyle(
-              fontSize: fonteSize2,
+              fontSize: height * fontFactor,
               fontWeight: FontWeight.bold,
               color: Colors.green),
         ),
@@ -62,9 +86,9 @@ class _ResultsPageState extends State<ResultsPage>
       return Container(
         padding: EdgeInsets.all(edgeValue),
         child: Text(
-          'Total Suspended Weight: ' + tsw.toStringAsFixed(2),
+          'TSW: ' + tsw.toStringAsFixed(2),
           style: TextStyle(
-              fontSize: fonteSize2,
+              fontSize: height * fontFactor,
               fontWeight: FontWeight.bold,
               color: Colors.red),
         ),
@@ -73,6 +97,7 @@ class _ResultsPageState extends State<ResultsPage>
   }
 
   Container totalGrossWeight() {
+    double height = MediaQuery.of(context).size.height;
     double tgw = Provider.of<DataProvider>(context).provTotalGrossWeight();
     if (tgw > 3028 || tgw < 4041) {
       return Container(
@@ -80,7 +105,7 @@ class _ResultsPageState extends State<ResultsPage>
         child: Text(
           ' TGW: ' + tgw.toStringAsFixed(2) + ' kg',
           style: TextStyle(
-              fontSize: fonteSize2,
+              fontSize: height * fontFactor,
               fontWeight: FontWeight.bold,
               color: Colors.green),
         ),
@@ -97,6 +122,7 @@ class _ResultsPageState extends State<ResultsPage>
   }
 
   Container pressureHeight() {
+    double height = MediaQuery.of(context).size.height;
     return Container(
       padding: EdgeInsets.all(edgeValue),
       child: Column(
@@ -107,7 +133,8 @@ class _ResultsPageState extends State<ResultsPage>
               children: [
                 Text(
                   'Pressure Height',
-                  style: TextStyle(fontSize: 20, color: Colors.blue),
+                  style: TextStyle(
+                      fontSize: height * fontFactor, color: Colors.black),
                 ),
               ],
             ),
@@ -120,7 +147,7 @@ class _ResultsPageState extends State<ResultsPage>
                         .toStringAsFixed(2) +
                     ' ft',
                 style: TextStyle(
-                    fontSize: fonteSize2,
+                    fontSize: height * fontFactor,
                     fontWeight: FontWeight.bold,
                     color: Colors.blue),
               ),
@@ -132,6 +159,7 @@ class _ResultsPageState extends State<ResultsPage>
   }
 
   Container accpetedTOCondition() {
+    double height = MediaQuery.of(context).size.height;
     return Container(
       padding: EdgeInsets.all(edgeValue),
       child: Column(
@@ -140,7 +168,8 @@ class _ResultsPageState extends State<ResultsPage>
             children: [
               Text(
                 'Accepted TO',
-                style: TextStyle(fontSize: 20, color: Colors.blue),
+                style: TextStyle(
+                    fontSize: height * fontFactor, color: Colors.black54),
               ),
             ],
           ),
@@ -152,7 +181,7 @@ class _ResultsPageState extends State<ResultsPage>
                         .toStringAsFixed(2) +
                     ' kg',
                 style: TextStyle(
-                    fontSize: fonteSize2,
+                    fontSize: height * fontFactor,
                     fontWeight: FontWeight.bold,
                     color: Colors.blue),
               ),
@@ -164,6 +193,7 @@ class _ResultsPageState extends State<ResultsPage>
   }
 
   Container resultantLDCondition() {
+    double height = MediaQuery.of(context).size.height;
     return Container(
       padding: EdgeInsets.all(edgeValue),
       child: Column(
@@ -172,7 +202,8 @@ class _ResultsPageState extends State<ResultsPage>
             children: [
               Text(
                 'Resultant LD',
-                style: TextStyle(fontSize: 20, color: Colors.blue),
+                style: TextStyle(
+                    fontSize: height * fontFactor, color: Colors.black54),
               ),
             ],
           ),
@@ -184,7 +215,7 @@ class _ResultsPageState extends State<ResultsPage>
                         .toStringAsFixed(2) +
                     ' kg',
                 style: TextStyle(
-                    fontSize: fonteSize2,
+                    fontSize: height * fontFactor,
                     fontWeight: FontWeight.bold,
                     color: Colors.blue),
               ),
@@ -198,7 +229,6 @@ class _ResultsPageState extends State<ResultsPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-
     Widget body = Row(
       children: [
         Column(
@@ -209,32 +239,24 @@ class _ResultsPageState extends State<ResultsPage>
             pressureHeight(),
           ],
         ),
-        Container(
-            margin: const EdgeInsets.only(left: 35.0),
-            padding: const EdgeInsets.all(15),
-            //height: 300,
-            child: VerticalDivider(color: Colors.blue)),
-        Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              inputContainer(
-                  'bagsToEq', 'Bags to Eq', 'Qtd', bagsToEqController),
-              inputContainer('bagsAddToBox', 'Bags Add to Box', 'Qtd',
-                  bagsAddtoBoxController),
-              resultantLDCondition(),
-              accpetedTOCondition(),
-            ],
-          ),
+        Column(
+          children: [
+            resultantLDCondition(),
+            accpetedTOCondition(),
+          ],
         ),
-        Container(
-            padding: const EdgeInsets.all(15),
-            //height: 300,
-            child: VerticalDivider(color: Colors.blue)),
+        Column(
+          children: [
+            inputContainer('bagsToEq', 'Bags to Eq', 'Qtd', bagsToEqController),
+            inputContainer('bagsAddToBox', 'Bags Add to Box', 'Qtd',
+                bagsAddtoBoxController),
+          ],
+        )
       ],
     );
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         body: body,
@@ -244,17 +266,22 @@ class _ResultsPageState extends State<ResultsPage>
 
   Container inputContainer(String varType, String varText, String hintText,
       TextEditingController controller) {
+    double height = MediaQuery.of(context).size.height;
     return Container(
       padding: const EdgeInsets.only(top: 2, left: 2),
       child: Column(
         children: [
           Container(
-            child: Text(varText),
+            child: Text(
+              varText,
+              style: TextStyle(fontSize: height * 0.02),
+            ),
           ),
           Container(
-            width: 150,
-            height: 40,
+            width: MediaQuery.of(context).size.width * .2,
+            height: height * 0.05,
             child: TextFormField(
+                style: TextStyle(fontSize: height * 0.02),
                 decoration: InputDecoration(
                     border: OutlineInputBorder(), hintText: hintText),
                 controller: controller,
