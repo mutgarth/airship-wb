@@ -10,13 +10,17 @@ class MyAppPage extends StatefulWidget {
 }
 
 class _MyAppPageState extends State<MyAppPage> {
-  double resultContainerSize = .30;
   @override
   Widget build(BuildContext context) {
+    double resultContainerSize = MediaQuery.of(context).size.height * 0.00035;
+    double appBarSize = MediaQuery.of(context).size.height * 0.02;
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.deepPurple[700],
+        toolbarHeight: appBarSize,
+      ),
       resizeToAvoidBottomInset: false,
       body: Container(
-        color: Colors.white,
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
@@ -31,14 +35,13 @@ class _MyAppPageState extends State<MyAppPage> {
                         bottomRight: Radius.circular(10)),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
+                        color: Colors.purple.withOpacity(0.5),
                         spreadRadius: 5,
                         blurRadius: 7,
-                        offset: Offset(0, 3),
+                        offset: Offset(0, 2),
                       )
                     ]),
                 child: SizedBox(
-                  //height: 150,
                   child: ResultsPage(),
                 ),
               ),
@@ -46,12 +49,10 @@ class _MyAppPageState extends State<MyAppPage> {
                 length: 2,
                 child: Container(
                   height: MediaQuery.of(context).size.height *
-                      (1 - resultContainerSize),
+                      (0.94 - resultContainerSize),
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(35),
-                          topRight: Radius.circular(35),
                           bottomLeft: Radius.circular(10),
                           bottomRight: Radius.circular(10)),
                       boxShadow: [
@@ -75,7 +76,7 @@ class _MyAppPageState extends State<MyAppPage> {
                     ),
                     Container(
                       height: MediaQuery.of(context).size.height *
-                          (.9 - resultContainerSize),
+                          (0.8 - resultContainerSize),
                       child: TabBarView(
                         children: [
                           EnvPage(),
@@ -92,7 +93,6 @@ class _MyAppPageState extends State<MyAppPage> {
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {},
         label: const Text('Save Data'),
-        icon: const Icon(Icons.ac_unit),
         backgroundColor: Colors.red,
       ),
     );
